@@ -82,7 +82,7 @@ class Customer(SAFRSBase, Base):
     Client_id = Column(Integer)
     allow_client_generated_ids = True
 
-    OrderList : list(Order) = relationship('Order', cascade_backrefs=False, back_populates="Orderlist")  # typing
+    OrderList : list['Order'] = relationship('Order', cascade_backrefs=False, back_populates="Orderlist")  # typing
 
     """_summary_
     in Customer

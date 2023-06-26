@@ -112,8 +112,10 @@ def declare_logic():
         row.RequiredDate
         row.Id
         row.Ready
+        row.Customer.Balance  # typing fails
         customer = models.Customer()
-        customer.Balance
+        for each_order in customer.OrderList:
+            each_order.
 
         if logic_row.ins_upd_dlt == "ins":  # logic engine fills parents for insert
             sales_rep = row.Employee        # parent accessor
