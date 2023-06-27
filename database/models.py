@@ -77,7 +77,7 @@ class Customer(SAFRSBase, Base):
     Country = Column(String(8000))
     Phone = Column(String(8000))
     Fax = Column(String(8000))
-    Balance = Column(DECIMAL)
+    Balance : DECIMAL = Column(DECIMAL)
     CreditLimit = Column(DECIMAL)
     OrderCount = Column(Integer, server_default=text("0"))
     UnpaidOrderCount = Column(Integer, server_default=text("0"))

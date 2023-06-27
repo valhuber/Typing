@@ -108,14 +108,15 @@ def declare_logic():
     """
     def congratulate_sales_rep(row: models.Order, old_row: models.Order, logic_row: LogicRow):
         """ use events for sending email, messages, etc. """
-        row.OrderDate
-        row.RequiredDate
-        row.Id
-        row.Ready
-        row.Customer.Address
-        customer = models.Customer()
+        customer = row.Customer         # FIXME - why does this not work?
+        customer = models.Customer()    # but this does (??)
         for each_order in customer.OrderList:
-            each_order.Country
+            each_order.AmountTotal
+            each_order.RequiredDate  # works (is changed)
+            each_order.OrderDate     # fails without : Date
+            each_order.Ready
+            each_order.Id
+            each_order.Customer.Balance
 
         if logic_row.ins_upd_dlt == "ins":  # logic engine fills parents for insert
             sales_rep = row.Employee        # parent accessor
