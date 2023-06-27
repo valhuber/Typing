@@ -16,4 +16,6 @@ Status:
 ## References
 
 * [typing](https://docs.sqlalchemy.org/en/20/changelog/whatsnew_20.html#sql-expression-statement-result-set-typing)
-* [backpopulates not backref](https://docs.sqlalchemy.org/en/14/orm/backref.html)
+* [working with related objects](https://docs.sqlalchemy.org/en/20/tutorial/orm_related_objects.html#tutorial-orm-related-objects)
+
+    * [backpopulates not backref](https://docs.sqlalchemy.org/en/14/orm/backref.html)
