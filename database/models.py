@@ -1,7 +1,9 @@
 # coding: utf-8
 from sqlalchemy import Boolean, Column, DECIMAL, Date, Double, ForeignKey, ForeignKeyConstraint, Integer, String, Text, text
 from sqlalchemy.orm import relationship
+from sqlalchemy.orm import Mapped
 from sqlalchemy.ext.declarative import declarative_base
+from typing import List
 
 
 ########################################################################################################################
@@ -82,14 +84,16 @@ class Customer(SAFRSBase, Base):
     Client_id = Column(Integer)
     allow_client_generated_ids = True
 
-    OrderList : list['Order'] = relationship('Order', cascade_backrefs=False, back_populates="Orderlist")  # typing
+    OrderList : Mapped[List['Order']] = relationship(back_populates="Customer")  # typing
 
-    """_summary_
-    in Customer
-    OrderList : List(Order) = relationship("Order", back_populates="Customer")
+    """
+    https://docs.sqlalchemy.org/en/20/tutorial/orm_related_objects.html#tutorial-orm-related-objects
 
-    in Order
-    Customer : Customer = relationship("Customer", back_populates="Orderlist")
+    # children (in customer...)
+    OrderList : Mapped[List['Order']] = relationship(back_populates="Customer")  # as above
+
+    # parents (in order...)
+    Customer : Mapped["Customer"] = relationship(back_populates="OrderList")  # see ~ 514
     """
 
     @jsonapi_attr
@@ -507,7 +511,7 @@ class Order(SAFRSBase, Base):
     # see backref on parent: Employee = relationship('Employee', cascade_backrefs=False, backref='OrderList')
 
     # parents
-    Customer : Customer = relationship("Customer", back_populates="Orderlist")  # typing
+    Customer : Mapped["Customer"] = relationship(back_populates="OrderList")  # typing
 
     # children
     parent = relationship('Order', remote_side=[Id], cascade_backrefs=False, backref='OrderList')  # special handling for self-relationships
